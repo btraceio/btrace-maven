@@ -47,3 +47,41 @@ mvn archetype:generate
   -DartifactId=[your project's artifact id]
   -DarchetypeArtifactId=btrace-project-archetype
 ```
+
+## Usage
+
+The artifacts are hosted by [bintray](http://bintray.com)
+
+Modify your maven __settings.xml__ to include the following section:
+```
+...
+<profiles>
+  <profile>
+    <repositories>
+      <repository>
+        <snapshots>
+          <enabled>false</enabled>
+        </snapshots>
+        <id>bintray-jbachorik-maven</id>
+        <name>bintray</name>
+        <url>http://dl.bintray.com/jbachorik/maven</url>
+      </repository>
+    </repositories>
+    <pluginRepositories>
+      <pluginRepository>
+        <snapshots>
+          <enabled>false</enabled>
+        </snapshots>
+        <id>bintray-jbachorik-maven</id>
+        <name>bintray-plugins</name>
+        <url>http://dl.bintray.com/jbachorik/maven</url>
+      </pluginRepository>
+    </pluginRepositories>
+    <id>bintray</id>
+  </profile>
+</profiles>
+<activeProfiles>
+  <activeProfile>bintray</activeProfile>
+</activeProfiles>
+...
+```
