@@ -20,12 +20,12 @@
 	    </snapshots>
 	    <id>bintray-jbachorik-maven</id>
 	    <name>bintray</name>
-	    <url>https://api.bintray.com/maven/jbachorik/maven/btrace/;publish=1</url>
+	    <url>https://api.bintray.com/maven/jbachorik/maven/btrace-maven/;publish=1</url>
 	</repository>
     </distributionManagement>
     <scm>
-	<connection>https://github.com/estrey/btrace-maven.git</connection>
-	<url>https://github.com/estrey/btrace-maven</url>
+	<connection>https://github.com/btraceio/btrace-maven.git</connection>
+	<url>https://github.com/btraceio/btrace-maven</url>
 	<tag>1.3.4-1</tag>
     </scm>
     <groupId>io.btrace</groupId>
