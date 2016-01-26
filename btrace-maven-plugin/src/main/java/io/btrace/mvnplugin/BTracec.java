@@ -132,7 +132,6 @@ public class BTracec extends AbstractMojo {
                     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
                         boolean isJava = file.toString().endsWith("java");
                         if (isJava) {
-                            getLog().info("*** checking: " + file);
                             String c = new String(Files.readAllBytes(file));
                             if (c.contains("@BTrace")) {
                                 fileList.add(file.toString());
