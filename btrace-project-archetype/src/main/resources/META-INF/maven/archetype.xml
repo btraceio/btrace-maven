@@ -1,0 +1,6 @@
+<archetype>
+    <id>btrace-project-archetype</id>
+    <sources>
+	<source>src/main/java/AllMethods.java</source>
+    </sources>
+</archetype>
