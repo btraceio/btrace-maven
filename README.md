@@ -16,7 +16,7 @@ Allows compilation of BTrace scripts as a part of the Maven project lifecycle.
     <plugin>
 	<groupId>io.btrace</groupId>
 	<artifactId>btrace-maven-plugin</artifactId>
-	<version>1.3.4</version>
+	<version>1.3.4.1</version>
 	<executions>
 	    <execution>
 		<goals>
