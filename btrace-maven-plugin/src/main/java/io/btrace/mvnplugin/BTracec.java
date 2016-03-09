@@ -41,21 +41,22 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
 
 /**
  *
  * @author Jaroslav Bachorik
  */
-@Mojo(name = "btracec", defaultPhase = LifecyclePhase.COMPILE)
+@Mojo(name = "btracec", defaultPhase = LifecyclePhase.COMPILE, requiresDependencyResolution = ResolutionScope.COMPILE)
 public class BTracec extends AbstractMojo {
-    @Parameter( defaultValue = "${project.build.sourceDirectory}", name = "sourceRoots", readonly = true, required = true )
-    private List<String> sourceRoots;
+    @Parameter(defaultValue = "${project.build.sourceDirectory}", required = true, readonly = true)
+    private String sourceDirectory;
 
-    @Parameter( name = "classPath", readonly = true, required = false )
+    @Parameter(name = "classpathElements", required = false )
     private List<String> classpathElements;
 
-    @Parameter( defaultValue = "${project.build.outputDirectory}", required = true, readonly = true )
+    @Parameter(defaultValue = "${project.build.outputDirectory}", required = true, readonly = true )
     private File outputDirectory;
 
     @Parameter(defaultValue = "${project}", required = true, readonly = true)
@@ -63,96 +64,99 @@ public class BTracec extends AbstractMojo {
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-        if (sourceRoots != null) {
-            List<String> sources = collectFiles();
-            if (sources.isEmpty()) {
-                getLog().info("Nothing to compile.");
-                return;
-            }
+        List<String> sources = collectFiles();
+        if (sources.isEmpty()) {
+            getLog().info("Nothing to compile.");
+            return;
+        }
 
-            StringBuilder ccp = new StringBuilder();
-            URLClassLoader ucl = (URLClassLoader)getClass().getClassLoader();
-            for(URL u : ucl.getURLs()) {
-                ccp.append(u.getPath()).append(File.pathSeparatorChar);
+        StringBuilder ccp = new StringBuilder();
+        URLClassLoader ucl = (URLClassLoader)getClass().getClassLoader();
+        for(URL u : ucl.getURLs()) {
+            ccp.append(u.getPath()).append(File.pathSeparatorChar);
+        }
+        try {
+            for(Object e : project.getCompileClasspathElements()) {
+                ccp.append(e).append(File.pathSeparatorChar);
             }
-            if (classpathElements != null) {
-                for(String cpe : classpathElements) {
-                    ccp.append(cpe).append(File.pathSeparatorChar);
-                }
+        } catch (Throwable t) {
+            getLog().error(t);
+        }
+        if (classpathElements != null) {
+            for(String cpe : classpathElements) {
+                ccp.append(cpe).append(File.pathSeparatorChar);
             }
+        }
 
-            List<String> args = new ArrayList<>();
-            args.addAll(Arrays.asList(
-                "java",
-                "-cp",
-                ccp.toString(),
-                "com.sun.btrace.compiler.Compiler",
-                "-d",
-                outputDirectory.getAbsolutePath())
-            );
-            args.addAll(sources);
+        List<String> args = new ArrayList<>();
+        args.addAll(Arrays.asList(
+            "java",
+            "-cp",
+            ccp.toString(),
+            "com.sun.btrace.compiler.Compiler",
+            "-d",
+            outputDirectory.getAbsolutePath())
+        );
+        args.addAll(sources);
 
-            ProcessBuilder pb = new ProcessBuilder(args);
+        ProcessBuilder pb = new ProcessBuilder(args);
 
-            try {
-                Process p = pb.start();
-                int exit = p.waitFor();
-                BufferedReader br = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-                String line;
-                while ((line = br.readLine()) != null) {
-                    getLog().error("[btracec] " + line);
-                    exit = 1;
-                }
-                BufferedReader br1 = new BufferedReader(new InputStreamReader(p.getInputStream()));
-                String line1;
-                while ((line1 = br1.readLine()) != null) {
-                    getLog().info("[btracec] " + line1);
-                }
-                if (exit != 0) {
-                    throw new MojoFailureException("Error running compiler");
-                }
-            } catch (Exception e) {
-                throw new MojoFailureException("Error executing compiler", e);
+        try {
+            Process p = pb.start();
+            int exit = p.waitFor();
+            BufferedReader br = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+            String line;
+            while ((line = br.readLine()) != null) {
+                getLog().error("[btracec] " + line);
+                exit = 1;
             }
+            BufferedReader br1 = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String line1;
+            while ((line1 = br1.readLine()) != null) {
+                getLog().info("[btracec] " + line1);
+            }
+            if (exit != 0) {
+                throw new MojoFailureException("Error running compiler");
+            }
+        } catch (Exception e) {
+            throw new MojoFailureException("Error executing compiler", e);
         }
     }
 
     private List<String> collectFiles() throws MojoFailureException {
         final List<String> fileList = new ArrayList<>();
-        for(String sr : sourceRoots) {
-            Path scrPath = new File(sr).toPath();
-            try {
-                Files.walkFileTree(scrPath, new FileVisitor<Path>() {
-                    @Override
-                    public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
-                        return FileVisitResult.CONTINUE;
-                    }
+        Path scrPath = new File(sourceDirectory).toPath();
+        try {
+            Files.walkFileTree(scrPath, new FileVisitor<Path>() {
+                @Override
+                public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+                    return FileVisitResult.CONTINUE;
+                }
 
-                    @Override
-                    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-                        boolean isJava = file.toString().endsWith("java");
-                        if (isJava) {
-                            String c = new String(Files.readAllBytes(file));
-                            if (c.contains("@BTrace")) {
-                                fileList.add(file.toString());
-                            }
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                    boolean isJava = file.toString().endsWith("java");
+                    if (isJava) {
+                        String c = new String(Files.readAllBytes(file));
+                        if (c.contains("@BTrace")) {
+                            fileList.add(file.toString());
                         }
-                        return FileVisitResult.CONTINUE;
                     }
+                    return FileVisitResult.CONTINUE;
+                }
 
-                    @Override
-                    public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
-                        return FileVisitResult.CONTINUE;
-                    }
+                @Override
+                public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
+                    return FileVisitResult.CONTINUE;
+                }
 
-                    @Override
-                    public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
-                        return FileVisitResult.CONTINUE;
-                    }
-                });
-            } catch (IOException e) {
-                throw new MojoFailureException("Source file inaccessible", e);
-            }
+                @Override
+                public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+                    return FileVisitResult.CONTINUE;
+                }
+            });
+        } catch (IOException e) {
+            throw new MojoFailureException("Source file inaccessible", e);
         }
         return fileList;
     }
