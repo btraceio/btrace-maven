@@ -2,7 +2,7 @@
 
 Provides Maven integration for [BTrace](https://github.com/jbachorik/btrace)
 
-__Version: 1.3.4.1__
+__Version: 1.3.4.2__
 
 
 ## Components
@@ -30,7 +30,7 @@ Allows compilation of BTrace scripts as a part of the Maven project lifecycle.
 ```
 
 The plugin configuration accepts the following parameters:
-* __sourceRoots__ - where the sources to compile are located (_default: ${project.build.sourceDirectory}_)
+* __sourceDirectory__ - where the sources to compile are located (_default: ${project.build.sourceDirectory}_)
 * __classPath__ - additional class path for compilation
 * __outputDirectory__ - where to put the compiled binaries (_default: ${project.build.outputDirectory}_)
 
