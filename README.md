@@ -24,6 +24,12 @@ Allows compilation of BTrace scripts as a part of the Maven project lifecycle.
 		</goals>
 	    </execution>
 	</executions>
+	<configuration>
+	    <classpathElements>
+	        <classpathElement>/path/to/jar_or_folder</classpathElement>
+	        ...
+	    </classpathElements>
+	</configuration>
     </plugin>
     ...
 </plugins>
@@ -31,7 +37,7 @@ Allows compilation of BTrace scripts as a part of the Maven project lifecycle.
 
 The plugin configuration accepts the following parameters:
 * __sourceDirectory__ - where the sources to compile are located (_default: ${project.build.sourceDirectory}_)
-* __classPath__ - additional class path for compilation
+* __classPathElements__ - additional class path for compilation
 * __outputDirectory__ - where to put the compiled binaries (_default: ${project.build.outputDirectory}_)
 
 
