@@ -2,99 +2,144 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <developers>
-	<developer>
-	    <name>Jaroslav Bachorik</name>
-	    <email>j.bachorik@btrace.io</email>
-	</developer>
+        <developer>
+            <name>Jaroslav Bachorik</name>
+            <email>j.bachorik@btrace.io</email>
+        </developer>
     </developers>
     <licenses>
-	<license>
-	    <name>GPL-2.0+CE</name>
-	    <url>https://raw.githubusercontent.com/btraceio/btrace-maven/master/LICENSE</url>
-	</license>
+        <license>
+            <name>GPL-2.0+CE</name>
+            <url>https://raw.githubusercontent.com/btraceio/btrace-maven/master/LICENSE</url>
+        </license>
     </licenses>
     <distributionManagement>
-	<repository>
-	    <snapshots>
-		<enabled>false</enabled>
-	    </snapshots>
-	    <id>bintray-jbachorik-maven</id>
-	    <name>bintray</name>
-	    <url>https://api.bintray.com/maven/jbachorik/maven/btrace-maven/;publish=1</url>
-	</repository>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>bintray-jbachorik-maven</id>
+            <name>bintray</name>
+            <url>https://api.bintray.com/maven/btraceio/maven/btrace-maven/;publish=1</url>
+        </repository>
     </distributionManagement>
     <scm>
-	<connection>https://github.com/btraceio/btrace-maven.git</connection>
-	<url>https://github.com/btraceio/btrace-maven</url>
-	<tag>1.3.5.1</tag>
+        <connection>https://github.com/btraceio/btrace-maven.git</connection>
+        <url>https://github.com/btraceio/btrace-maven</url>
+        <tag>1.3.6.1</tag>
     </scm>
     <groupId>io.btrace</groupId>
     <artifactId>btrace-maven</artifactId>
     <packaging>pom</packaging>
     <name>BTrace Maven Support</name>
-    <version>1.3.5.1</version>
+    <version>1.3.6.1</version>
     <properties>
-	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	<maven.compiler.source>1.7</maven.compiler.source>
-	<maven.compiler.target>1.7</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
 
-	<version.maven>3.0.5</version.maven>
+        <version.maven>3.0.5</version.maven>
     </properties>
 
     <modules>
-	<module>btrace-maven-plugin</module>
-	<module>btrace-project-archetype</module>
+        <module>btrace-maven-plugin</module>
+        <module>btrace-project-archetype</module>
     </modules>
 
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>central</id>
+            <name>bintray-central</name>
+            <url>https://jcenter.bintray.com</url>
+        </repository>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>btrace</id>
+            <name>bintray-btrace</name>
+            <url>https://dl.bintray.com/btraceio/maven</url>
+        </repository>
+    </repositories>
+
     <build>
-	<pluginManagement>
-	    <plugins>
-		<plugin>
-		    <groupId>org.codehaus.mojo</groupId>
-		    <artifactId>license-maven-plugin</artifactId>
-		    <version>1.8</version>
-		    <executions>
-			<execution>
-			    <id>default-cli</id>
-			    <configuration>
-				<licenseMerges>
-				    <licenseMerge>The Apache Software License, Version 2.0|Apache License, Version 2.0|Apache Public License 2.0</licenseMerge>
-				</licenseMerges>
-				<outputDirectory>${basedir}</outputDirectory>
-				<thirdPartyFilename>LICENSE-3RD-PARTY.txt</thirdPartyFilename>
-			    </configuration>
-			</execution>
-		    </executions>
-		</plugin>
-	    </plugins>
-	</pluginManagement>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>1.8</version>
+                    <executions>
+                        <execution>
+                            <id>default-cli</id>
+                            <configuration>
+                                <licenseMerges>
+                                    <licenseMerge>The Apache Software License, Version 2.0|Apache License, Version 2.0|Apache Public License 2.0</licenseMerge>
+                                </licenseMerges>
+                                <outputDirectory>${basedir}</outputDirectory>
+                                <thirdPartyFilename>LICENSE-3RD-PARTY.txt</thirdPartyFilename>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 
     <profiles>
-	<profile>
-	    <id>nonmac-profile</id>
-	    <activation>
-		<activeByDefault>true</activeByDefault>
-		<file>
-		    <exists>${JAVA_HOME}/lib/tools.jar</exists>
-		</file>
-	    </activation>
-	    <properties>
-		<toolsjar>${JAVA_HOME}/lib/tools.jar</toolsjar>
-	    </properties>
-	</profile>
-	<profile>
-	    <id>mac-profile</id>
-	    <activation>
-		<activeByDefault>false</activeByDefault>
-		<file>
-		    <exists>${java.home}/../Classes/classes.jar</exists>
-		</file>
-	    </activation>
-	    <properties>
-		<toolsjar>${java.home}/../Classes/classes.jar</toolsjar>
-	    </properties>
-	</profile>
+        <profile>
+            <id>nonmac-profile</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <file>
+                    <exists>${JAVA_HOME}/lib/tools.jar</exists>
+                </file>
+            </activation>
+            <properties>
+                <toolsjar>${JAVA_HOME}/lib/tools.jar</toolsjar>
+            </properties>
+        </profile>
+        <profile>
+            <id>mac-profile</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <file>
+                    <exists>${java.home}/../Classes/classes.jar</exists>
+                </file>
+            </activation>
+            <properties>
+                <toolsjar>${java.home}/../Classes/classes.jar</toolsjar>
+            </properties>
+        </profile>
     </profiles>
 
 </project>
