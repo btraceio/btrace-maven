@@ -1,6 +1,7 @@
 <archetype>
     <id>btrace-project-archetype</id>
-    <sources>
-	<source>src/main/java/AllMethods.java</source>
-    </sources>
+    <resources>
+        <resource>src/main/btrace/AllMethods.java</resource>
+        <resource>src/main/btrace/agent.properties</resource>
+    </resources>
 </archetype>
