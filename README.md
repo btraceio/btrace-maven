@@ -1,6 +1,6 @@
 # BTrace Maven Support
 
-Provides Maven integration for [BTrace](https://github.com/jbachorik/btrace)
+Provides Maven integration for [BTrace](https://github.com/btraceio/btrace)
 
 __Version: 1.3.7.1__
 
