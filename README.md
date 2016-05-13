@@ -68,19 +68,19 @@ Modify your maven __settings.xml__ to include the following section:
 				<snapshots>
 					<enabled>false</enabled>
 				</snapshots>
-				<id>bintray-btraceio-maven</id>
-				<name>bintray</name>
-				<url>http://dl.bintray.com/btraceio/maven</url>
+				<id>central</id>
+				<name>bintray-central</name>
+				<url>https://jcenter.bintray.com</url>
 			</repository>
-		</repositories>
+    		</repositories>
 		<pluginRepositories>
 			<pluginRepository>
 				<snapshots>
 					<enabled>false</enabled>
 				</snapshots>
-				<id>bintray-btraceio-maven</id>
-				<name>bintray-plugins</name>
-				<url>http://dl.bintray.com/btraceio/maven</url>
+				<id>central</id>
+				<name>bintray-central</name>
+				<url>https://jcenter.bintray.com</url>
 			</pluginRepository>
 		</pluginRepositories>
 		<id>bintray</id>
