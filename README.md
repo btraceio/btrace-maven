@@ -2,7 +2,7 @@
 
 Provides Maven integration for [BTrace](https://github.com/btraceio/btrace)
 
-__Version: 1.3.8.1__
+__Version: 1.3.8.4__
 
 
 ## Components
