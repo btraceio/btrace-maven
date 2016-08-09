@@ -54,5 +54,6 @@ public final class AgentPropertiesTransformer implements ResourceTransformer {
     @Override
     public void modifyOutputStream(JarOutputStream os) throws IOException {
         os.putNextEntry(new JarEntry(AGENT_PROPS_FILE));
+        props.store(os, "BTrace Agent Properties");
     }
 }
