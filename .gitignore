@@ -13,3 +13,6 @@ hs_err_pid*
 
 # builds
 */target/*
+
+# ide files
+*.iml

@@ -59,6 +59,9 @@ public class BTracec extends AbstractMojo {
     @Parameter(defaultValue = "${project.build.outputDirectory}", required = true, readonly = true )
     private File outputDirectory;
 
+    @Parameter(defaultValue = "true", required = false, readonly = true)
+    private String generatePack;
+
     @Parameter(defaultValue = "${project}", required = true, readonly = true)
     private MavenProject project;
 
@@ -97,6 +100,9 @@ public class BTracec extends AbstractMojo {
             "-d",
             outputDirectory.getAbsolutePath())
         );
+        if (generatePack.toLowerCase().equals("false")) {
+            args.add("-nopack");
+        }
         args.addAll(sources);
 
         ProcessBuilder pb = new ProcessBuilder(args);
