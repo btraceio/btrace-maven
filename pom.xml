@@ -16,13 +16,15 @@
   </licenses>
   <distributionManagement>
     <repository>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
       <id>bintray-btraceio-maven</id>
       <name>bintray</name>
       <url>https://api.bintray.com/maven/btraceio/maven/btrace-maven/;publish=1</url>
     </repository>
+    <snapshotRepository>
+      <id>dummyId</id>
+      <name>dummyName</name>
+      <url>dummyURL</url>
+    </snapshotRepository>
   </distributionManagement>
   <scm>
     <connection>https://github.com/btraceio/btrace-maven.git</connection>
