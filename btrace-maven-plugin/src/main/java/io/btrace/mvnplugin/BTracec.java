@@ -62,6 +62,9 @@ public class BTracec extends AbstractMojo {
     @Parameter(defaultValue = "true", required = false, readonly = true)
     private String generatePack;
 
+    @Parameter(required = false, readonly = true)
+    private String packExtension;
+
     @Parameter(defaultValue = "${project}", required = true, readonly = true)
     private MavenProject project;
 
@@ -102,6 +105,9 @@ public class BTracec extends AbstractMojo {
         );
         if (generatePack.toLowerCase().equals("false")) {
             args.add("-nopack");
+        } else if (packExtension != null) {
+            args.add("-packext");
+            args.add(packExtension);
         }
         args.addAll(sources);
 
