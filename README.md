@@ -2,8 +2,7 @@
 
 Provides Maven integration for [BTrace](https://github.com/btraceio/btrace)
 
-__Version: 1.3.10__
-
+__Version: 2.0.0__
 
 ## Components
 
@@ -16,7 +15,7 @@ Allows compilation of BTrace scripts as a part of the Maven project lifecycle.
     <plugin>
 	<groupId>io.btrace</groupId>
 	<artifactId>btrace-maven-plugin</artifactId>
-	<version>1.3.8.6</version>
+	<version>2.0.0</version>
 	<executions>
 	    <execution>
 		<goals>

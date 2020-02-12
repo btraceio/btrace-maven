@@ -99,7 +99,7 @@ public class BTracec extends AbstractMojo {
             "java",
             "-cp",
             ccp.toString(),
-            "com.sun.btrace.compiler.Compiler",
+            "org.openjdk.btrace.compiler.Compiler",
             "-d",
             outputDirectory.getAbsolutePath())
         );

@@ -1,7 +1,7 @@
 package ${groupId}.${artifactId};
 
-import com.sun.btrace.annotations.*;
-import static com.sun.btrace.BTraceUtils.*;
+import org.openjdk.btrace.core.annotations.*;
+import static org.openjdk.btrace.core.BTraceUtils.*;
 
 @BTrace public class AllMethods {
     @OnMethod(
