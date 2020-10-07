@@ -50,7 +50,9 @@ To bootstrap a new project use
 mvn archetype:generate
   -DgroupId=[your project's group id]
   -DartifactId=[your project's artifact id]
+  -DarchetypeGroupId=io.btrace 
   -DarchetypeArtifactId=btrace-project-archetype
+  -DarchetypeVersion=2.0.2
 ```
 
 ## Usage
