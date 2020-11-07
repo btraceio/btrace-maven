@@ -52,7 +52,7 @@ mvn archetype:generate
   -DartifactId=[your project's artifact id]
   -DarchetypeGroupId=io.btrace 
   -DarchetypeArtifactId=btrace-project-archetype
-  -DarchetypeVersion=2.0.2
+  -DarchetypeVersion=2.0.3
 ```
 
 ## Usage
