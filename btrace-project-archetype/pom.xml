@@ -3,7 +3,7 @@
     <parent>
 	<groupId>io.btrace</groupId>
 	<artifactId>btrace-maven</artifactId>
-	<version>2.0.3</version>
+	<version>2.2.5</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
