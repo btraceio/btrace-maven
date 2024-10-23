@@ -70,8 +70,8 @@ Modify your maven __settings.xml__ to include the following section:
 					<enabled>false</enabled>
 				</snapshots>
 				<id>central</id>
-				<name>bintray-central</name>
-				<url>https://jcenter.bintray.com</url>
+				<name>ossrh-central</name>
+				<url>https://oss.sonatype.org</url>
 			</repository>
     		</repositories>
 		<pluginRepositories>
@@ -80,15 +80,15 @@ Modify your maven __settings.xml__ to include the following section:
 					<enabled>false</enabled>
 				</snapshots>
 				<id>central</id>
-				<name>bintray-central</name>
-				<url>https://jcenter.bintray.com</url>
+				<name>ossrh-central</name>
+				<url>https://oss.sonatype.org</url>
 			</pluginRepository>
 		</pluginRepositories>
-		<id>bintray</id>
+		<id>ossrh</id>
 	</profile>
 </profiles>
 <activeProfiles>
-	<activeProfile>bintray</activeProfile>
+	<activeProfile>ossrh</activeProfile>
 </activeProfiles>
 </settings>
 ...
