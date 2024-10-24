@@ -57,7 +57,7 @@ mvn archetype:generate
 
 ## Usage
 
-The artifacts are hosted by [bintray](https://bintray.com/btraceio/maven/btrace-maven)
+The artifacts are hosted by [Maven Central](https://mvnrepository.com/artifact/io.btrace/btrace-maven-plugin)
 
 Modify your maven __settings.xml__ to include the following section:
 ```

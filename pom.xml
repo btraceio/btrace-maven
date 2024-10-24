@@ -49,24 +49,6 @@
         <module>btrace-maven-plugin</module>
         <module>btrace-project-archetype</module>
     </modules>
-    <repositories>
-        <repository>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <id>central</id>
-            <name>bintray-central</name>
-            <url>https://jcenter.bintray.com</url>
-        </repository>
-        <repository>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <id>btrace</id>
-            <name>bintray-btrace</name>
-            <url>https://dl.bintray.com/btraceio/maven</url>
-        </repository>
-    </repositories>
     <build>
         <pluginManagement>
             <plugins>

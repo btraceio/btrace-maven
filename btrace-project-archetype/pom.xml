@@ -7,7 +7,6 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>io.btrace</groupId>
     <artifactId>btrace-project-archetype</artifactId>
     <name>BTrace Project Archetype</name>
 </project>
