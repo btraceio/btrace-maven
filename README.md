@@ -2,7 +2,7 @@
 
 Provides Maven integration for [BTrace](https://github.com/btraceio/btrace)
 
-__Version: 2.2.5__
+__Version: 2.2.6__
 
 ## Components
 
@@ -15,7 +15,7 @@ Allows compilation of BTrace scripts as a part of the Maven project lifecycle.
     <plugin>
 	<groupId>io.btrace</groupId>
 	<artifactId>btrace-maven-plugin</artifactId>
-	<version>2.2.5</version>
+	<version>2.2.6</version>
 	<executions>
 	    <execution>
 		<goals>
@@ -52,7 +52,7 @@ mvn archetype:generate
   -DartifactId=[your project's artifact id]
   -DarchetypeGroupId=io.btrace 
   -DarchetypeArtifactId=btrace-project-archetype
-  -DarchetypeVersion=2.2.5
+  -DarchetypeVersion=2.2.6
 ```
 
 ## Usage

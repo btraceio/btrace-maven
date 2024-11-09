@@ -6,7 +6,7 @@
     <version>${version}</version>
 
     <properties>
-        <btrace.plugin.version>2.2.5</btrace.plugin.version>
+        <btrace.plugin.version>2.2.6</btrace.plugin.version>
     </properties>
 
     <dependencies>
